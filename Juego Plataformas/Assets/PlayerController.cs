@@ -14,11 +14,15 @@ public class PlayerController : MonoBehaviour {
     public float jumpPower = 6.5f;
     private bool jump;
     private bool doublejump;
+    private bool  movement = true;
+
+    private SpriteRenderer spr;
 
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        spr = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         float h = Input.GetAxis("Horizontal");
-
+        if (!movement) h = 0;
         rb2d.AddForce(Vector2.right*speed*h); // fuerza aplicada que gener velocidad al player
 
         /*if (rb2d.velocity.x > maxSpeed)
@@ -92,11 +96,35 @@ public class PlayerController : MonoBehaviour {
             rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse); //fuerza aplicada para que salte
             jump = false;
         }
-        Debug.Log(rb2d.velocity.x);
+        //Debug.Log(rb2d.velocity.x);
     }
 
     private void OnBecameInvisible()
     {
         transform.position = new Vector3(-1, 0, 0); //respawn
+    }
+
+    public void EnemyJump()
+    {
+        jump = true;
+    }
+
+    public void EnemyKnockBack(float enemyPosX)
+    {
+        jump = true;
+
+        float side = Mathf.Sign(enemyPosX - transform.position.x);
+        rb2d.AddForce(Vector2.left * side * jumpPower, ForceMode2D.Impulse);
+        movement = false;
+        Invoke("EnableMovement", 0.7f);
+
+        Color color = new Color(255/255f, 106/255f, 0/255f);
+        spr.color = color;
+    }
+
+    void EnableMovement()
+    {
+        movement = true;
+        spr.color = Color.white;
     }
 }
