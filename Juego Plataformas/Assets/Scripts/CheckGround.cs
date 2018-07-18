@@ -10,16 +10,16 @@ public class CheckGround : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GetComponentInParent<PlayerController>();
-        rb2d = GetComponent<Rigidbody2D>();
+        rb2d = GetComponentInParent<Rigidbody2D>();
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platform")
        {
-           rb2d.velocity = new Vector3(0f,0f,0f);
-            player.transform.parent = collision.transform;
-            player.grounded = true;
+           rb2d.velocity = new Vector3(0f,0f,0f);// arregla las caidas verticales dejando a cero la velocidad del player
+           player.transform.parent = collision.transform;
+           player.grounded = true;
        }
     }
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class CheckGround : MonoBehaviour {
 
         if (collision.gameObject.tag == "Platform")
         {
-           player.transform.parent = collision.transform;
+           player.transform.parent = collision.transform; // moverse con la velocidad de la platafroma
            player.grounded = true;
         }
     }

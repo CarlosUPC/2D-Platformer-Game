@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DrawSceneLine : MonoBehaviour {
 
+    //variables necesarias para poder utilizar sus propiedades transform
     public Transform from;
     public Transform to;
 

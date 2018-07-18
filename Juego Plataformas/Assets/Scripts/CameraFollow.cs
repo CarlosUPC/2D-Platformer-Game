@@ -6,8 +6,8 @@ public class CameraFollow : MonoBehaviour {
 
     public GameObject follow;
     public Vector2 minCamPos, maxCamPos;
-    public float smoothTime;
 
+    public float smoothTime;
     private Vector2 velocity;
 
 	// Use this for initialization
@@ -22,6 +22,7 @@ public class CameraFollow : MonoBehaviour {
 
         //float posY = follow.transform.position.y;
 
+        //configuramos la posicion de la camara todo el rato segun la posicion del player
         transform.position = new Vector3(
             Mathf.Clamp(posX, minCamPos.x, maxCamPos.x),
             Mathf.Clamp(posY, minCamPos.y, maxCamPos.y),

@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
         anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
         anim.SetBool("Grounded", grounded);
 
+        //Salto de emergencia
         if (grounded)
         {
             doublejump = true;
